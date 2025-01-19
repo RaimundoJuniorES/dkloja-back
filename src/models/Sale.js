@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 const mongoosePaginate = require('mongoose-paginate');
 
 const SaleSchema = new mongoose.Schema({
-    idClient:{
+    clientId:{
         type: String,
         required: true
     },
-    name:{
+    clientName:{
         type: String,
         required: true
     },
@@ -22,7 +22,7 @@ const SaleSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    remains: {
+    amountPaid: {
         type: String
     },
     createdAt: {

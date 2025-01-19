@@ -7,7 +7,8 @@ const current = new Date();
 module.exports = {
     async index(req, res){
         const { page = 1 } = req.query;
-        const sales = await Sale.paginate({}, { page, limit: 10 });
+        // const sales = await Sale.paginate({}, { page, limit: 10 });
+        const sales = await Sale.find();
 
         return res.json(sales);
     },

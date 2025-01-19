@@ -6,17 +6,27 @@ const logger = require('morgan')
 // require("log-node")();
 
 //iniciando o app
+const port = 8080;
+const database = 'nodeapi';
 const app = express();
 app.use(logger('dev'));
 app.use(express.json());
 app.use(cors());
 
 //iniciando o db
-mongoose.connect("mongodb://localhost:27017/nodeapi");
+mongoose.connect(`mongodb://127.0.0.1:27017/${database}`)
+    .then(() => {
+        console.log(`-> Connected to Database: ${database}`);
+    })
+    .catch((err) => {
+        console.log("Not Connected to Database ERROR! ", err);
+    });
 
 requireDir("./src/models");
 
 //rotas
-app.use('/api', require("./src/routes"));
+app.use(require("./src/routes"));
 
-app.listen(3001);
+app.listen(port, () => {
+    console.log(`-> API running on port ${port}`);
+});

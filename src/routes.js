@@ -5,6 +5,7 @@ const ProductController = require("./controllers/ProductController");
 const ClientController = require("./controllers/ClientController");
 const SaleController = require("./controllers/SaleController");
 const CobrancaController = require("./controllers/CobrancaController");
+const PaymentController = require("./controllers/PaymentController");
 
 //Rotas Cliente
 routes.get("/clients", ClientController.index);
@@ -35,7 +36,9 @@ routes.get('/cobranca/month', CobrancaController.month);
 routes.get('/cobranca/year', CobrancaController.year);
 routes.get("/cobranca/late", CobrancaController.late);
 
-//rota de pagamento
-routes.put("/sale/:id", SaleController.pay);
+//Rotas de pagamento
+routes.get("/payment", PaymentController.index);
+routes.post("/payment", PaymentController.store);
+
 
 module.exports = routes;
