@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const Sale = mongoose.model('Sale');
-const Client = mongoose.model('Client')
 
 const current = new Date();
 

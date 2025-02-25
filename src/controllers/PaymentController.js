@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 // const { index, store } = require('./ProductController');
 
 const Payment = mongoose.model('Payment');
+const Sale = mongoose.model('Sale');
 
 module.exports = {
     async index(req, res){
@@ -19,13 +20,27 @@ module.exports = {
     //     return res.json(client);
     // },
 
-    async store(req, res){        
+    async store(req, res){
+        const { saleId, value } = req.body;     
+        console.log(saleId);
+
+        const sale = await Sale.findById(saleId);
+
+
+
+        console.log(sale)
+
+        sale.amountPaid = Number(sale.amountPaid) + Number(value);
+
         await Payment.create(req.body)
-            .then(response => res.json({
+            .then(async response => {
+                await Sale.updateOne(sale);
+
+                res.json({
                 status: false,
                 msg: "Pagamento realizado com sucesso!",
                 data: response.data
-            }))
+            })})
             .catch(error => res.json(error))
     },
 
